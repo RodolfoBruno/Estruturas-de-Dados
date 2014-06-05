@@ -1,0 +1,64 @@
+#include<iostream>
+using namespace std;
+
+template <class T>
+class Celula{
+	public:
+		T item; //item a ser guardado na pilha
+		Celula *prox; //aponta para o próximo elemento
+		
+		//Construtor
+		Celula(){
+			prox = NULL;
+		}
+};
+
+template <class T> 
+class Pilha{
+
+	private:
+		Celula<T> *topo;
+		int tam;
+
+	public:
+		Pilha();
+		bool vazia();
+		void imprime();
+		bool empilhar(T);
+		T desempilhar();
+		int tamanho();
+};
+template <class T> 
+Pilha<T>::Pilha(){
+	this->topo = NULL;
+	this->tam = 0;
+}
+
+template <class T> bool 
+Pilha<T>::vazia(){
+	return this->topo==NULL;
+	
+}
+
+template <class T> bool
+Pilha<T>::empilhar(T item){
+	Celula<T> *aux = this->topo;
+	this->topo = new Celula<T>();
+	this->topo->item = item;
+	this->topo->prox = aux;
+	tam++;
+}
+
+template <class T> T
+Pilha<T>::desempilhar(){
+	if(vazia() == false){
+		T item = topo->item;
+		topo = topo->prox;
+		tam--;
+		return item;	
+	}
+}
+template <class T> int
+Pilha<T>::tamanho(){
+	return this->tam;
+}
